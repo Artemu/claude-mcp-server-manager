@@ -1,5 +1,15 @@
 import SwiftUI
 
+/// App metadata read from the bundle's Info.plist.
+enum AppInfo {
+    static var version: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "dev"
+    }
+    static var build: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "0"
+    }
+}
+
 struct ContentView: View {
     @EnvironmentObject var store: ConfigStore
     @State private var selection: UUID?
@@ -122,6 +132,9 @@ struct ContentView: View {
                 Button("Backups") { store.revealBackupsInFinder() }
                     .buttonStyle(.link)
             }
+            Text("MCP Manager v\(AppInfo.version)")
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
         }
         .font(.caption)
         .padding(.horizontal, 12)

@@ -7,9 +7,15 @@ cd "$(dirname "$0")"
 APP_NAME="MCP Manager"
 BIN_NAME="MCPManager"
 BUNDLE_ID="com.kyle.mcpmanager"
-VERSION="1.0.0"
 
-echo "▶ Building release binary…"
+# Version (CFBundleShortVersionString): override with VERSION=... or derive from
+# the latest git tag (e.g. v1.2.3 -> 1.2.3). Falls back to 0.0.0 for dev builds.
+VERSION="${VERSION:-$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//')}"
+VERSION="${VERSION:-0.0.0}"
+# Build number (CFBundleVersion): total commit count, monotonically increasing.
+BUILD="$(git rev-list --count HEAD 2>/dev/null || echo 1)"
+
+echo "▶ Building release binary (v$VERSION, build $BUILD)…"
 swift build -c release
 
 BIN_PATH="$(swift build -c release --show-bin-path)/$BIN_NAME"
@@ -38,7 +44,7 @@ cat > "$CONTENTS/Info.plist" <<PLIST
     <key>CFBundleDisplayName</key>     <string>$APP_NAME</string>
     <key>CFBundleExecutable</key>      <string>$BIN_NAME</string>
     <key>CFBundleIdentifier</key>      <string>$BUNDLE_ID</string>
-    <key>CFBundleVersion</key>         <string>$VERSION</string>
+    <key>CFBundleVersion</key>         <string>$BUILD</string>
     <key>CFBundleShortVersionString</key> <string>$VERSION</string>
     <key>CFBundlePackageType</key>     <string>APPL</string>
     <key>CFBundleIconFile</key>        <string>AppIcon</string>

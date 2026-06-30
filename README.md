@@ -6,8 +6,8 @@
 
 **A native macOS app for safely managing the MCP servers in your Claude configs.**
 
-<!-- Update OWNER/mcp-manager-app once you push to GitHub -->
-[![Build](https://github.com/OWNER/mcp-manager-app/actions/workflows/build.yml/badge.svg)](https://github.com/OWNER/mcp-manager-app/actions/workflows/build.yml)
+[![Build](https://github.com/Artemu/claude-mcp-server-manager/actions/workflows/build.yml/badge.svg)](https://github.com/Artemu/claude-mcp-server-manager/actions/workflows/build.yml)
+[![Release](https://img.shields.io/github/v/release/Artemu/claude-mcp-server-manager?sort=semver)](https://github.com/Artemu/claude-mcp-server-manager/releases/latest)
 [![License: No-Resale](https://img.shields.io/badge/license-No--Resale-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS%2014%2B-lightgrey.svg)](#requirements)
 
@@ -72,11 +72,19 @@ Example (`http`):
 - macOS 14 (Sonoma) or later
 - [Xcode](https://developer.apple.com/xcode/) 15+ / Swift 5.9+ command-line tools (only needed to **build** from source)
 
-## Install / Build from source
+## Install
+
+### Download a release
+
+Grab the latest `MCP-Manager-vX.Y.Z.app.zip` from the
+[**Releases**](https://github.com/Artemu/claude-mcp-server-manager/releases/latest) page,
+unzip it, and move `MCP Manager.app` into `/Applications`.
+
+### Build from source
 
 ```bash
-git clone https://github.com/OWNER/mcp-manager-app.git
-cd mcp-manager-app
+git clone git@github.com:Artemu/claude-mcp-server-manager.git
+cd claude-mcp-server-manager
 
 make app          # builds "build/MCP Manager.app"
 make run          # builds and launches it
@@ -144,6 +152,24 @@ make clean      # remove build artifacts
 ## Continuous integration
 
 [`.github/workflows/build.yml`](.github/workflows/build.yml) builds the app on every push and pull request to `main` (and on demand), then uploads the packaged `MCP Manager.app` as a downloadable artifact.
+
+## Versioning & releases
+
+The project follows [semantic versioning](https://semver.org). The app's version
+is derived at build time from the latest git tag (e.g. tag `v1.2.3` →
+`CFBundleShortVersionString` `1.2.3`), and the build number is the commit count.
+The current version is shown at the bottom of the sidebar.
+
+To cut a release:
+
+```bash
+git tag -a v1.2.3 -m "Release v1.2.3"
+git push origin v1.2.3
+```
+
+Pushing a `v*` tag triggers [`release.yml`](.github/workflows/release.yml), which
+builds the app and publishes a GitHub Release with the packaged
+`MCP Manager.app` attached and auto-generated notes.
 
 ## License
 

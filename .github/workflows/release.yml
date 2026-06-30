@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to release (e.g. v1.0.0)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & publish release
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+          fetch-depth: 0   # needed so build-app.sh can derive the version from tags
+
+      - name: Resolve version
+        id: ver
+        run: echo "tag=${GITHUB_REF_NAME:-${{ github.event.inputs.tag }}}" >> "$GITHUB_OUTPUT"
+
+      - name: Build .app bundle
+        run: make app
+
+      - name: Zip the app
+        run: |
+          cd build
+          ditto -c -k --keepParent "MCP Manager.app" "MCP-Manager-${{ steps.ver.outputs.tag }}.app.zip"
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.ver.outputs.tag }}" \
+            "build/MCP-Manager-${{ steps.ver.outputs.tag }}.app.zip" \
+            --title "MCP Manager ${{ steps.ver.outputs.tag }}" \
+            --generate-notes
