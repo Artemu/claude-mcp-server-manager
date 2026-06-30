@@ -78,7 +78,18 @@ Example (`http`):
 
 Grab the latest `MCP-Manager-vX.Y.Z.app.zip` from the
 [**Releases**](https://github.com/Artemu/claude-mcp-server-manager/releases/latest) page,
-unzip it, and move `MCP Manager.app` into `/Applications`.
+unzip it, and move `MCP Manager.app` into `/Applications`. The app is a
+**universal binary** — it runs natively on both Apple Silicon and Intel Macs.
+
+> **First launch (Gatekeeper).** The app is ad-hoc signed but not notarized by
+> Apple, so macOS quarantines apps downloaded from the internet and may report
+> that the app is *"damaged"* or from an *"unidentified developer"*. This is
+> expected for unsigned apps — to allow it, either **right-click → Open**, or
+> clear the quarantine flag:
+>
+> ```bash
+> xattr -dr com.apple.quarantine "/Applications/MCP Manager.app"
+> ```
 
 ### Build from source
 

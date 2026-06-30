@@ -15,10 +15,13 @@ VERSION="${VERSION:-0.0.0}"
 # Build number (CFBundleVersion): total commit count, monotonically increasing.
 BUILD="$(git rev-list --count HEAD 2>/dev/null || echo 1)"
 
-echo "▶ Building release binary (v$VERSION, build $BUILD)…"
-swift build -c release
+# Build a universal binary so the app runs on both Apple Silicon and Intel Macs.
+ARCH_FLAGS="--arch arm64 --arch x86_64"
 
-BIN_PATH="$(swift build -c release --show-bin-path)/$BIN_NAME"
+echo "▶ Building universal release binary (arm64 + x86_64, v$VERSION, build $BUILD)…"
+swift build -c release $ARCH_FLAGS
+
+BIN_PATH="$(swift build -c release $ARCH_FLAGS --show-bin-path)/$BIN_NAME"
 
 APP_DIR="build/$APP_NAME.app"
 CONTENTS="$APP_DIR/Contents"
@@ -57,7 +60,16 @@ cat > "$CONTENTS/Info.plist" <<PLIST
 PLIST
 
 echo "▶ Ad-hoc code signing…"
-codesign --force --deep --sign - "$APP_DIR" >/dev/null 2>&1 || echo "  (codesign skipped)"
+codesign --force --deep --sign - "$CONTENTS/MacOS/$BIN_NAME"
+codesign --force --deep --sign - "$APP_DIR"
+codesign --verify --deep --strict "$APP_DIR" && echo "  signature OK"
+
+ARCHS="$(lipo -archs "$CONTENTS/MacOS/$BIN_NAME")"
+echo "▶ Architectures: $ARCHS"
+case "$ARCHS" in
+    *arm64*x86_64* | *x86_64*arm64*) echo "  universal ✓" ;;
+    *) echo "  WARNING: expected a universal (arm64 + x86_64) binary, got: $ARCHS" ;;
+esac
 
 echo "✅ Built: $APP_DIR"
 echo "   Run with:  open \"$APP_DIR\""

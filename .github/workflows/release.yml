@@ -41,7 +41,19 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          cat > "$RUNNER_TEMP/notes.md" <<'NOTES'
+          **Universal build** — runs natively on Apple Silicon and Intel Macs.
+
+          **Install:** download the `.app.zip`, unzip, and move `MCP Manager.app` to `/Applications`.
+
+          The app is ad-hoc signed (not notarized by Apple), so on first launch macOS may say it's "damaged" or from an unidentified developer. Right-click the app and choose **Open**, or clear the quarantine flag:
+
+          ```
+          xattr -dr com.apple.quarantine "/Applications/MCP Manager.app"
+          ```
+          NOTES
           gh release create "${{ steps.ver.outputs.tag }}" \
             "build/MCP-Manager-${{ steps.ver.outputs.tag }}.app.zip" \
             --title "MCP Manager ${{ steps.ver.outputs.tag }}" \
+            --notes-file "$RUNNER_TEMP/notes.md" \
             --generate-notes
