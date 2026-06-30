@@ -1,0 +1,40 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build macOS app
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show toolchain versions
+        run: |
+          swift --version
+          xcodebuild -version
+
+      - name: Build (release)
+        run: make check
+
+      - name: Package .app bundle
+        run: make app
+
+      - name: Zip the app
+        run: |
+          cd build
+          ditto -c -k --keepParent "MCP Manager.app" "MCP-Manager.app.zip"
+
+      - name: Upload app artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MCP-Manager-app
+          path: build/MCP-Manager.app.zip
+          if-no-files-found: error

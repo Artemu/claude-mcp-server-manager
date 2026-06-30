@@ -1,0 +1,26 @@
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# App build output
+build/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+# Xcode (if the project is ever opened there)
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# Editor / misc
+*.swp
+*~
+.idea/
+.vscode/

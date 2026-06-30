@@ -1,0 +1,77 @@
+MCP Manager License (No-Resale License), Version 1.0
+Copyright (c) 2026 Kyle Lindeque
+
+This is a source-available license. It is NOT an OSI-approved open source
+license, because it restricts resale. Read it before using the Software.
+
+1. DEFINITIONS
+
+   "Software" means the source code, object code, documentation, and any other
+   files distributed under this license, together with any modified versions or
+   derivative works of them.
+
+   "You" means any individual or legal entity (including a company or
+   organization of any size) exercising permissions under this license.
+
+   "Sell" or "Resale" means to provide the Software to a third party in exchange
+   for a fee, payment, or other consideration where the Software, or its
+   functionality, is part or all of what is being paid for. This includes
+   selling copies, charging license or subscription fees for the Software,
+   renting or leasing it, sublicensing it for a fee, or offering it (or a
+   modified version of it) as a paid product or paid hosted service.
+
+2. GRANT OF RIGHTS
+
+   Subject to the conditions below, permission is hereby granted, free of
+   charge, to any person or organization obtaining a copy of the Software, to:
+
+     (a) use the Software for any purpose, including within a commercial,
+         for-profit, or business setting;
+     (b) copy and distribute the Software;
+     (c) modify the Software and create derivative works; and
+     (d) distribute those modified versions and derivative works.
+
+3. CONDITIONS
+
+   (a) Attribution. The above copyright notice, this list of conditions, and
+       the disclaimer in Section 5 must be included in all copies or
+       substantial portions of the Software.
+
+   (b) No Resale. You may NOT Sell or Resell the Software, whether on its own,
+       in modified form, or bundled with other software, where the Software or
+       its functionality forms part or all of the value being paid for. You may
+       not offer the Software, or a modified version of it, as a paid product or
+       a paid hosted/SaaS service.
+
+4. PERMITTED USE (FOR CLARITY)
+
+   For the avoidance of doubt, the following are expressly permitted at no
+   charge and do not count as Resale:
+
+     - Use by individuals, and by companies and organizations of any size,
+       including for internal, business, and commercial operations.
+     - Using the Software as a tool to perform work or deliver paid goods and
+       services, provided the Software itself is not the thing being sold and is
+       not offered to others as a paid product or service.
+     - Distributing the Software for free, with attribution.
+     - Modifying the Software for your own use and sharing those modifications
+       for free.
+
+   In short: anyone may use, change, and share this Software for free, including
+   companies. The only thing you may not do is charge others for the Software
+   itself.
+
+5. DISCLAIMER OF WARRANTY AND LIMITATION OF LIABILITY
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
+   OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+   THE SOFTWARE.
+
+6. TERMINATION
+
+   Any use of the Software in violation of this license automatically terminates
+   your rights under it.
