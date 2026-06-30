@@ -10,7 +10,7 @@ BUNDLE_ID="com.kyle.mcpmanager"
 
 # Version (CFBundleShortVersionString): override with VERSION=... or derive from
 # the latest git tag (e.g. v1.2.3 -> 1.2.3). Falls back to 0.0.0 for dev builds.
-VERSION="${VERSION:-$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//')}"
+VERSION="${VERSION:-$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || true)}"
 VERSION="${VERSION:-0.0.0}"
 # Build number (CFBundleVersion): total commit count, monotonically increasing.
 BUILD="$(git rev-list --count HEAD 2>/dev/null || echo 1)"
